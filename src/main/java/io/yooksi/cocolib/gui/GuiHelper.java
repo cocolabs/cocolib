@@ -72,7 +72,7 @@ public class GuiHelper {
 	}
 
 	/**
-	 * Draws the binded texture to the screen.
+	 * Draws the texture bound to the screen.
 	 *
 	 * @param x position to draw the texture along the {@code x} axis.
 	 * @param y position to draw the texture along the {@code y} axis.
