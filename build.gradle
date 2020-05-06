@@ -104,6 +104,17 @@ artifacts {
     archives sourcesJar
 }
 
+// Forge doesn't handle loading classes from different modules in dev environment so well.
+task mergeProductionWithTestClasses(type: Copy) {
+    from("$buildDir/classes/java/main/") {
+        // Exclude main mod production class so we don't load 2 mods
+        exclude "**/CocoLib.class"
+    }
+    into "$buildDir/classes/java/test"
+}
+// Remember to manually add testClasses task to run before the launch
+testClasses.finalizedBy('mergeProductionWithTestClasses')
+
 // Process resources on build and make sure that variables are
 // correctly inserted into mods.toml when the mod is built or run
 processResources {
