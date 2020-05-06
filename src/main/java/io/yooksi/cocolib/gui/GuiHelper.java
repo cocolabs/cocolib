@@ -58,6 +58,8 @@ public class GuiHelper {
 		Minecraft instance = Minecraft.getInstance();
 		TextureManager manager = instance.getTextureManager();
 
+		sprite.updateScaledPosition(instance.getMainWindow());
+
 		// Bind sprite map
 		manager.bindTexture(sprite.getTexture());
 

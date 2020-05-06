@@ -1,5 +1,7 @@
 package io.yooksi.cocolib.gui;
 
+import net.minecraft.client.MainWindow;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -46,6 +48,9 @@ public class SpriteObject {
 		}
 	}
 
+	private int windowScaledHeight;
+	private int windowScaledWidth;
+
 	private final int height;
 	private final int width;
 
@@ -58,11 +63,15 @@ public class SpriteObject {
 	/** Set of 2D coordinates used for sprite {@code UV} mapping */
 	@NotNull private final UVCoordinates uv;
 
-	private SpriteObject(ResourceLocation loc, Coordinates pos, UVCoordinates uv, int width, int height) {
+	private SpriteObject(ResourceLocation location, Coordinates position,
+						 UVCoordinates uvCoordinates, int width, int height) {
 
-		this.texture = loc;
-		this.coordinates = pos;
-		this.uv = uv;
+		this.texture = location;
+		this.coordinates = position;
+		this.uv = uvCoordinates;
+
+		this.windowScaledHeight = GuiHelper.DEFAULT_WINDOW_HEIGHT;
+		this.windowScaledWidth = GuiHelper.DEFAULT_WINDOW_WIDTH;
 
 		this.height = height;
 		this.width = width;
@@ -83,6 +92,10 @@ public class SpriteObject {
 		@Contract(value = "_, _-> new", pure = true)
 		public static Builder create(String namespace, String path) {
 			return new Builder(new ResourceLocation(namespace, path));
+		}
+		@Contract(value = "_-> new", pure = true)
+		public static Builder create(ResourceLocation location) {
+			return new Builder(location);
 		}
 
 		@Contract("_, _ -> this")
@@ -112,12 +125,36 @@ public class SpriteObject {
 
 		@Contract(value = "-> new", pure = true)
 		public SpriteObject build() {
-			return new SpriteObject(texture, coordinates, uv, width, height);
+			return new SpriteObject(texture, coordinates == null ? new Coordinates(0, 0) :
+					coordinates, uv == null ? new UVCoordinates(0, 0) : uv, width, height);
+		}
+	}
+
+	/**
+	 * Update sprite coordinates to scale with the current window size.
+	 * @param window instance of Minecraft {@code MainWindow}.
+	 */
+	public void updateScaledPosition(MainWindow window) {
+
+		if (!doesScaledSizeMatch(window))
+		{
+			coordinates = GuiHelper.getScaledPosition(getX(), getY(), window);
+			windowScaledWidth = window.getScaledWidth();
+			windowScaledHeight = window.getScaledHeight();
 		}
 	}
 
 	public ResourceLocation getTexture() {
 		return texture;
+	}
+
+	/**
+	 * @param window instance of {@code MainWindow} to compare size with
+	 * @return {@code true} if the stored scaled window width and height match the given window
+	 */
+	public boolean doesScaledSizeMatch(MainWindow window) {
+		return window.getScaledHeight() == windowScaledHeight 
+				&& window.getScaledWidth() == windowScaledWidth;
 	}
 
 	/**
