@@ -2,6 +2,8 @@ package io.yooksi.cocolib.gui;
 
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This class represents a game sprite ready to be drawn on screen.
@@ -48,13 +50,13 @@ public class SpriteObject {
 	private final int width;
 
 	/** Texture location for this sprite */
-	private final ResourceLocation texture;
+	@NotNull private final ResourceLocation texture;
 
 	/** Set of 2D coordinates holding the position of the sprite relative to main window */
-	private final Coordinates coordinates;
+	@NotNull private Coordinates coordinates;
 
 	/** Set of 2D coordinates used for sprite {@code UV} mapping */
-	private final UVCoordinates uv;
+	@NotNull private final UVCoordinates uv;
 
 	private SpriteObject(ResourceLocation loc, Coordinates pos, UVCoordinates uv, int width, int height) {
 
@@ -70,9 +72,9 @@ public class SpriteObject {
 
 		private int height;
 		private int width;
-		private final ResourceLocation texture;
-		private Coordinates coordinates;
-		private UVCoordinates uv;
+		@NotNull private final ResourceLocation texture;
+		@Nullable private Coordinates coordinates;
+		@Nullable private UVCoordinates uv;
 
 		private Builder(ResourceLocation texture) {
 			this.texture = texture;
