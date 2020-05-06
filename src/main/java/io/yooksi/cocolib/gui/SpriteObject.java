@@ -104,7 +104,7 @@ public class SpriteObject {
 		@Contract("_, _ -> this")
 		public Builder withUV(int u, int v) {
 
-			uv = new UVCoordinates(Math.min(u, width), Math.min(v, height));
+			uv = new UVCoordinates(u, v);
 			return this;
 		}
 
