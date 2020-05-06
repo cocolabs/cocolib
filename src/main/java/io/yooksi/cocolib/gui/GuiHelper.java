@@ -29,10 +29,10 @@ public class GuiHelper {
 	 */
 	public static SpriteObject.Coordinates getCenteredPosition(int width, int y, MainWindow window) {
 
-		int coordX = window.getScaledWidth() / 2 - width / 2;
-		int coordY = window.getScaledHeight() - y;
+		int scaledX = window.getScaledWidth() / 2 - width / 2;
+		int scaledY = window.getScaledHeight() - y;
 
-		return new SpriteObject.Coordinates(coordX, coordY);
+		return new SpriteObject.Coordinates(scaledX, scaledY);
 	}
 
 	/**
@@ -47,15 +47,16 @@ public class GuiHelper {
 	 */
 	public static SpriteObject.Coordinates getScaledPosition(int x, int y, MainWindow window) {
 
-		int coordX = window.getScaledWidth() / 2 - (DEFAULT_WINDOW_WIDTH - x) + DEFAULT_WINDOW_WIDTH / 2;
-		int coordY = window.getScaledHeight() - (DEFAULT_WINDOW_HEIGHT - y);
+		int scaledX = window.getScaledWidth() / 2 - (DEFAULT_WINDOW_WIDTH - x) + DEFAULT_WINDOW_WIDTH / 2;
+		int scaledY = window.getScaledHeight() - (DEFAULT_WINDOW_HEIGHT - y);
 
-		return new SpriteObject.Coordinates(coordX, coordY);
+		return new SpriteObject.Coordinates(scaledX, scaledY);
 	}
 
 	public static void bindAndDrawTexture(SpriteObject sprite) {
 
-		TextureManager manager = Minecraft.getInstance().getTextureManager();
+		Minecraft instance = Minecraft.getInstance();
+		TextureManager manager = instance.getTextureManager();
 
 		// Bind sprite map
 		manager.bindTexture(sprite.getTexture());
