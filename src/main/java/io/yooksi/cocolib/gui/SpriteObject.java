@@ -6,28 +6,18 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static io.yooksi.cocolib.gui.PlaneGeometry.*;
+
 /**
  * This class represents a game sprite ready to be drawn on screen.
  * <p>Use {@link Builder} to build a new {@code SpriteObject}.
  */
 public class SpriteObject {
 
-	/** Set of 2D coordinates holding the position of the sprite relative to main window */
-	public static class Coordinates {
+	/** Size of the sprite object */
+	private final Dimensions size;
 
-		public final int x;
-		public final int y;
-
-		public Coordinates(int x, int y) {
-			this.x = x; this.y = y;
-		}
-	}
-
-	private int windowScaledHeight;
-	private int windowScaledWidth;
-
-	private final int height;
-	private final int width;
+	private final Dimensions scaledWindowSize;
 
 	/** Texture location for this sprite */
 	@NotNull private final ResourceLocation location;
@@ -49,20 +39,19 @@ public class SpriteObject {
 		currentPos = position;
 		uv = uvCoordinates;
 
-		windowScaledHeight = GuiHelper.DEFAULT_WINDOW_HEIGHT;
-		windowScaledWidth = GuiHelper.DEFAULT_WINDOW_WIDTH;
-
-		this.height = height;
-		this.width = width;
+		size = new Dimensions(width, height);
+		scaledWindowSize = new Dimensions(
+				GuiHelper.DEFAULT_WINDOW_WIDTH,
+				GuiHelper.DEFAULT_WINDOW_HEIGHT
+		);
 	}
 
 	public static class Builder {
 
-		private int height;
-		private int width;
 		@NotNull private final ResourceLocation texture;
 		@Nullable private Coordinates coordinates;
 		@Nullable private Coordinates uv;
+		private int width, height;
 
 		private Builder(ResourceLocation texture) {
 			this.texture = texture;
@@ -115,11 +104,13 @@ public class SpriteObject {
 	 */
 	public void updateScaledPosition(MainWindow window) {
 
+		// Calculate scaled position only if window size has changed
 		if (!doesScaledSizeMatch(window))
 		{
 			currentPos = GuiHelper.getScaledPosition(originPos.x, originPos.y, window);
-			windowScaledWidth = window.getScaledWidth();
-			windowScaledHeight = window.getScaledHeight();
+
+			scaledWindowSize.width = window.getScaledWidth();
+			scaledWindowSize.height = window.getScaledHeight();
 		}
 	}
 
@@ -132,10 +123,8 @@ public class SpriteObject {
 	 * @return {@code true} if the stored scaled window width and height match the given window
 	 */
 	public boolean doesScaledSizeMatch(MainWindow window) {
-		return window.getScaledHeight() == windowScaledHeight 
-				&& window.getScaledWidth() == windowScaledWidth;
+		return window.getScaledHeight() == size.height && window.getScaledWidth() == size.width;
 	}
-
 
 	public Coordinates getOriginalPosition() {
 		return originPos;
@@ -178,10 +167,10 @@ public class SpriteObject {
 	}
 
 	public int getWidth() {
-		return width;
+		return size.width;
 	}
 
 	public int getHeight() {
-		return height;
+		return size.height;
 	}
 }

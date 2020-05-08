@@ -5,6 +5,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.renderer.texture.TextureManager;
 
+import static io.yooksi.cocolib.gui.PlaneGeometry.*;
+
 /**
  * This class contains helpful method and fields for working with GUI.
  */
@@ -27,12 +29,12 @@ public class GuiHelper {
 	 * @param y position on the {@code y} axis (from bottom).
 	 * @param window instance of Minecraft {@code MainWindow}.
 	 */
-	public static SpriteObject.Coordinates getCenteredPosition(int width, int y, MainWindow window) {
+	public static Coordinates getCenteredPosition(int width, int y, MainWindow window) {
 
 		int scaledX = window.getScaledWidth() / 2 - width / 2;
 		int scaledY = window.getScaledHeight() - y;
 
-		return new SpriteObject.Coordinates(scaledX, scaledY);
+		return new Coordinates(scaledX, scaledY);
 	}
 
 	/**
@@ -45,12 +47,12 @@ public class GuiHelper {
 	 * @param y initial position of element along {@code y} axis.
 	 * @param window instance of Minecraft {@code MainWindow}.
 	 */
-	public static SpriteObject.Coordinates getScaledPosition(int x, int y, MainWindow window) {
+	public static Coordinates getScaledPosition(int x, int y, MainWindow window) {
 
 		int scaledX = window.getScaledWidth() / 2 - (DEFAULT_WINDOW_WIDTH - x) + DEFAULT_WINDOW_WIDTH / 2;
 		int scaledY = window.getScaledHeight() - (DEFAULT_WINDOW_HEIGHT - y);
 
-		return new SpriteObject.Coordinates(scaledX, scaledY);
+		return new Coordinates(scaledX, scaledY);
 	}
 
 	public static void bindAndDrawTexture(SpriteObject sprite) {
