@@ -3,7 +3,6 @@ package io.yooksi.cocolib.gui;
 import net.minecraft.client.MainWindow;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static io.yooksi.cocolib.gui.PlaneGeometry.*;
@@ -20,16 +19,16 @@ public class SpriteObject {
 	private final Dimensions scaledWindowSize;
 
 	/** Texture location for this sprite */
-	@NotNull private final ResourceLocation location;
+	private final ResourceLocation location;
 
 	/** Position relative to the default size of the main window screen */
-	@NotNull private final Coordinates originPos;
+	private final Coordinates originPos;
 
 	/** Position of the sprite relative to the current size of the main window screen */
-	@NotNull private Coordinates currentPos;
+	private Coordinates currentPos;
 
 	/** Set of 2D coordinates used for sprite {@code UV} mapping */
-	@NotNull private final Coordinates uv;
+	private final Coordinates uv;
 
 	private SpriteObject(ResourceLocation location, Coordinates position,
 						 Coordinates uvCoordinates, int width, int height) {
@@ -48,10 +47,9 @@ public class SpriteObject {
 
 	public static class Builder {
 
-		@NotNull private final ResourceLocation texture;
-		@Nullable private Coordinates coordinates;
-		@Nullable private Coordinates uv;
 		private int width, height;
+		private final ResourceLocation texture;
+		@Nullable private Coordinates uv, coordinates;
 
 		private Builder(ResourceLocation texture) {
 			this.texture = texture;
