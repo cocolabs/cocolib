@@ -48,6 +48,9 @@ public final class CocoLogger {
 	public static void warn(String log) {
 		logger.warn(log);
 	}
+	public static void warn(String log, Object...args) {
+		logger.warn(log, String.format(log, args));
+	}
 	public static void debug(String log) {
 		logger.debug(log);
 	}
