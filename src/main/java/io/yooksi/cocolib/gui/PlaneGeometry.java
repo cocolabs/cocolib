@@ -22,10 +22,45 @@ public class PlaneGeometry {
 	 */
 	public static class Dimensions {
 
-		public int width, height;
+		private int width, height;
 
 		public Dimensions(int width, int height) {
 			this.width = width; this.height = height;
 		}
+
+		/**
+		 * Shorthand method to change {@code Dimensions} values.
+		 * <p>
+		 *     Note that invoking this from {@link ConstantDimensions ConstantDimensions}
+		 *     will result in a {@code UnsupportedOperationException} due to immutable design.
+		 * </p>
+		 */
+		public void update(int width, int height) {
+
+			this.width = width;
+			this.height = height;
+		}
+
+		/**
+		 * @return {@code true} if internal dimensions match given arguments
+		 */
+		public boolean isEqual(int width, int height) {
+			return this.width == width && this.height == height;
+		}
+
+		/**
+		 * @return size of the plane along {@code x} axis.
+		 */
+		public int getWidth() {
+			return width;
+		}
+
+		/**
+		 * @return size of the plane along {@code y} axis.
+		 */
+		public int getHeight() {
+			return height;
+		}
+	}
 	}
 }
