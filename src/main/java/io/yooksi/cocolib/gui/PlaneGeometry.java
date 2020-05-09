@@ -62,5 +62,26 @@ public class PlaneGeometry {
 			return height;
 		}
 	}
+
+	/**
+	 * {@code Immutable} size of the two dimensional plane.
+	 * <p>
+	 *     Internal dimensions values are not intended to be mutable and calling
+	 *     {@link #update update} method will result in a {@code UnsupportedOperationException}.
+	 * </p>
+	 */
+	public static class ConstantDimensions extends Dimensions {
+
+		public ConstantDimensions(int width, int height) {
+			super(width, height);
+		}
+
+		/**
+		 * @throws UnsupportedOperationException because dimension values are immutable.
+		 */
+		@Override
+		public void update(int width, int height) {
+			throw new UnsupportedOperationException();
+		}
 	}
 }
