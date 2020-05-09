@@ -24,4 +24,11 @@ public class MathTools {
 	public static boolean isValueInRange(int value, int min, int max) {
 		return (value>= min) && (value<= max);
 	}
+
+	/**
+	 * @return what percent param {@code value} is from param {@code from}.
+	 */
+	public static double getPercentage(double value, double from) {
+		return value / from * 100;
+	}
 }
