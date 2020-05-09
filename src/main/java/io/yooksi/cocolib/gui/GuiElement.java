@@ -10,7 +10,7 @@ import static io.yooksi.cocolib.gui.PlaneGeometry.*;
 /**
  * This class contains helpful method and fields for working with GUI.
  */
-public class GuiHelper {
+public class GuiElement {
 
 	/** Default width of the Minecraft main window */
 	public static final int DEFAULT_WINDOW_WIDTH = 427;
@@ -19,7 +19,7 @@ public class GuiHelper {
 	public static final int DEFAULT_WINDOW_HEIGHT = 240;
 
 	/** Prevent class instantiation */
-	private GuiHelper() {}
+	private GuiElement() {}
 
 	/**
 	 * Returns a set of coordinates for a {@code GUI} element with the given width
