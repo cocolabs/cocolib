@@ -4,6 +4,7 @@ import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.renderer.texture.TextureManager;
+import org.jetbrains.annotations.Contract;
 
 import static io.yooksi.cocolib.gui.PlaneGeometry.*;
 
@@ -12,47 +13,36 @@ import static io.yooksi.cocolib.gui.PlaneGeometry.*;
  */
 public class GuiElement {
 
-	/** Default width of the Minecraft main window */
-	public static final int DEFAULT_WINDOW_WIDTH = 427;
-
-	/** Default height of the Minecraft main window */
-	public static final int DEFAULT_WINDOW_HEIGHT = 240;
-
-	/** Prevent class instantiation */
-	private GuiElement() {}
+	/**
+	 * Current <i>scaled</i> size of the Minecraft main window.
+	 * <p>Updated from {@link #doesScaledSizeMatch()}
+	 */
+	private final Dimensions SCALED_WINDOW_SIZE = new Dimensions(427, 240);
 
 	/**
-	 * Returns a set of coordinates for a {@code GUI} element with the given width
-	 * and position on the {@code y} axis in the main window.
+	 * Check if {@code MainWindow} size has changed since last time
+	 * this method was called and update the dimension values if needed
 	 *
-	 * @param width size of the element along the {@code x} axis.
-	 * @param y position on the {@code y} axis (from bottom).
-	 * @param window instance of Minecraft {@code MainWindow}.
+	 * @return {@code true} if {@link #SCALED_WINDOW_SIZE} matches the {@code MainWindow} size.
 	 */
-	public static Coordinates getCenteredPosition(int width, int y, MainWindow window) {
+	boolean doesScaledSizeMatch() {
 
-		int scaledX = window.getScaledWidth() / 2 - width / 2;
-		int scaledY = window.getScaledHeight() - y;
+		MainWindow window = Minecraft.getInstance().getMainWindow();
 
-		return new Coordinates(scaledX, scaledY);
+		if (!SCALED_WINDOW_SIZE.isEqual(window.getScaledWidth(), window.getScaledHeight()))
+		{
+			SCALED_WINDOW_SIZE.update(window.getScaledWidth(), window.getScaledHeight());
+			return false;
+		}
+		else return true;
 	}
 
 	/**
-	 * Returns a set of coordinates for a {@code GUI} element with the given
-	 * position in the default window size coordinate grid. This way of resolving
-	 * position should work for any set of given coordinates whether you want to
-	 * center an element or have a free form position.
-	 *
-	 * @param x initial position of element along {@code x} axis.
-	 * @param y initial position of element along {@code y} axis.
-	 * @param window instance of Minecraft {@code MainWindow}.
+	 * @return {@code Dimensions} that match the {@link #SCALED_WINDOW_SIZE}.
 	 */
-	public static Coordinates getScaledPosition(int x, int y, MainWindow window) {
-
-		int scaledX = window.getScaledWidth() / 2 - (DEFAULT_WINDOW_WIDTH - x) + DEFAULT_WINDOW_WIDTH / 2;
-		int scaledY = window.getScaledHeight() - (DEFAULT_WINDOW_HEIGHT - y);
-
-		return new Coordinates(scaledX, scaledY);
+	@Contract(pure = true)
+	public Dimensions getScaledWindowSize() {
+		return new Dimensions(SCALED_WINDOW_SIZE.getWidth(), SCALED_WINDOW_SIZE.getHeight());
 	}
 
 	public static void bindAndDrawTexture(SpriteObject sprite) {
@@ -60,7 +50,7 @@ public class GuiElement {
 		Minecraft instance = Minecraft.getInstance();
 		TextureManager manager = instance.getTextureManager();
 
-		sprite.updateScaledPosition(instance.getMainWindow());
+		sprite.updateScaledPosition();
 
 		// Bind sprite map
 		manager.bindTexture(sprite.getTexture());
