@@ -2,6 +2,8 @@ package io.yooksi.cocolib.gui;
 
 public class PlaneGeometry {
 
+	public enum Axis { X, Y }
+
 	/**
 	 * Set of numerical coordinates in two-dimensional space.
 	 *
@@ -14,6 +16,28 @@ public class PlaneGeometry {
 
 		public Coordinates(int x, int y) {
 			this.x = x; this.y = y;
+		}
+
+		/**
+		 * Shorthand method to change {@code Coordinates} values.
+		 * @see #update(Axis, int)
+		 */
+		public void update(int x, int y) {
+
+			this.x = x;
+			this.y = y;
+		}
+
+		/**
+		 * Shorthand method to change {@code Coordinates} values.
+		 * @see #update(int, int)
+		 */
+		public void update(Axis axis, int value) {
+
+			switch(axis) {
+				case X: x = value;
+				case Y: y = value;
+			}
 		}
 	}
 
