@@ -1,7 +1,6 @@
 package io.yooksi.cocolib.gui;
 
 import io.yooksi.cocolib.CocoLib;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -40,25 +39,22 @@ public class GuiHandler {
 	@SubscribeEvent
 	public void onPreRenderOverlay(RenderGameOverlayEvent.Pre event) {
 
-		if (Minecraft.getInstance().playerController != null) {
+		// This element should perfectly draw over vanilla xp bar
+		GuiElement.bindAndDrawTexture(XP_BAR_ELEMENT);
 
-			// This element should perfectly draw over vanilla xp bar
-			GuiElement.bindAndDrawTexture(XP_BAR_ELEMENT);
+		// This element should draw in top left corner of the screen
+		GuiElement.bindAndDrawTexture(TOP_LEFT_ELEMENT);
 
-			// This element should draw in top left corner of the screen
-			GuiElement.bindAndDrawTexture(TOP_LEFT_ELEMENT);
+		// This element should draw in top right corner of the screen
+		GuiElement.bindAndDrawTexture(TOP_RIGHT_ELEMENT);
 
-			// This element should draw in top right corner of the screen
-			GuiElement.bindAndDrawTexture(TOP_RIGHT_ELEMENT);
+		// This element should draw in the middle of the screen
+		GuiElement.bindAndDrawTexture(CROSSHAIRS);
 
-			// This element should draw in the middle of the screen
-			GuiElement.bindAndDrawTexture(CROSSHAIRS);
+		// This element should draw in the bottom left corner of the screen
+		GuiElement.bindAndDrawTexture(BOTTOM_LEFT_ELEMENT);
 
-			// This element should draw in the bottom left corner of the screen
-			GuiElement.bindAndDrawTexture(BOTTOM_LEFT_ELEMENT);
-
-			// This element should draw in the bottom right corner of the screen
-			GuiElement.bindAndDrawTexture(BOTTOM_RIGHT_ELEMENT);
-		}
+		// This element should draw in the bottom right corner of the screen
+		GuiElement.bindAndDrawTexture(BOTTOM_RIGHT_ELEMENT);
 	}
 }

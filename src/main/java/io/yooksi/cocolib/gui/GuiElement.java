@@ -6,7 +6,7 @@ import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.renderer.texture.TextureManager;
 import org.jetbrains.annotations.Contract;
 
-import static io.yooksi.cocolib.gui.PlaneGeometry.*;
+import static io.yooksi.cocolib.gui.PlaneGeometry.Dimensions;
 
 /**
  * This class contains helpful method and fields for working with GUI.
