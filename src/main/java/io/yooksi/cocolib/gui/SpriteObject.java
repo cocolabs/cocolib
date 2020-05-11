@@ -143,14 +143,21 @@ public class SpriteObject extends GuiElement {
 	}
 
 	/**
-	 * @return the sprite {@code UV} mapping coordinate along {@code x} axis
+	 * @return sprite {@code UV} mapping coordinates
+	 */
+	public Coordinates getUV() {
+		return uv;
+	}
+
+	/**
+	 * @return sprite {@code UV} mapping coordinate along {@code x} axis
 	 */
 	public int getU() {
 		return uv.x;
 	}
 
 	/**
-	 * @return the sprite {@code UV} mapping coordinate along {@code y} axis
+	 * @return sprite {@code UV} mapping coordinate along {@code y} axis
 	 */
 	public int getV() {
 		return uv.y;
