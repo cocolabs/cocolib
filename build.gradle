@@ -84,6 +84,11 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 }
 build.dependsOn sourcesJar
 
+task devJar(type: Jar, dependsOn: classes) {
+    classifier = 'dev'
+    from sourceSets.main.output
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -91,6 +96,9 @@ publishing {
         }
         mavenJava(MavenPublication) {
             artifact sourcesJar
+        }
+        mavenJava(MavenPublication) {
+            artifact devJar
         }
     }
     repositories {
