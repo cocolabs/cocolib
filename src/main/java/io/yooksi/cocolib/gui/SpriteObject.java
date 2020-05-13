@@ -1,78 +1,71 @@
+/*
+ *  Copyright (C) 2020 Matthew Cain
+ *
+ *  This file is part of CocoLib.
+ *
+ *  CocoLib is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with CocoLib. If not, see <https://www.gnu.org/licenses/>.
+ */
 package io.yooksi.cocolib.gui;
 
+import io.yooksi.cocolib.CocoLogger;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.Contract;
+
+import static io.yooksi.cocolib.gui.PlaneGeometry.*;
 
 /**
  * This class represents a game sprite ready to be drawn on screen.
  * <p>Use {@link Builder} to build a new {@code SpriteObject}.
  */
-public class SpriteObject {
-
-	/**
-	 * This class holds a set of 2D coordinates used for {@code UV} mapping
-	 */
-	public static class UVCoordinates {
-
-		public final int u;
-		public final int v;
-
-		public UVCoordinates(int u, int v) {
-			this.u = u; this.v = v;
-		}
-	}
-
-	/**
-	 * This class holds a set of 2D coordinates in the Minecraft main window
-	 * with <i>default</i> size intended for positioning sprites.
-	 */
-	public static class Coordinates {
-
-		/** Width of the default Minecraft main window*/
-		public static final int MAX_X = GuiHelper.DEFAULT_WINDOW_WIDTH;
-
-		/** Height of the default Minecraft main window */
-		public static final int MAX_Y = GuiHelper.DEFAULT_WINDOW_HEIGHT;
-
-		public final int x;
-		public final int y;
-
-		public Coordinates(int x, int y) {
-
-			this.x = Math.min(x, MAX_X);
-			this.y = Math.min(y, MAX_Y);
-		}
-	}
-
-	private final int height;
-	private final int width;
+public class SpriteObject extends GuiElement {
 
 	/** Texture location for this sprite */
-	private final ResourceLocation texture;
+	private final ResourceLocation location;
 
-	/** Set of 2D coordinates holding the position of the sprite relative to main window */
-	private final Coordinates coordinates;
+	/** Alignment of the sprite relative to main window screen. */
+	public final Alignment alignment;
+
+	/**
+	 * Values to offset from the edge of the main window screen.
+	 * <p>The offset direction depends on sprite {@link #alignment}.
+	 */
+	public final Dimensions offset;
+
+	/** Position relative to the size of the main window screen */
+	private Coordinates position;
+
+	/** Size of the sprite object */
+	private final Dimensions size;
 
 	/** Set of 2D coordinates used for sprite {@code UV} mapping */
-	private final UVCoordinates uv;
+	private final Coordinates uv;
 
-	private SpriteObject(ResourceLocation loc, Coordinates pos, UVCoordinates uv, int width, int height) {
+	private SpriteObject(ResourceLocation location, Alignment alignment, int offsetX,
+						 int offsetY, int u, int v, int width, int height) {
 
-		this.texture = loc;
-		this.coordinates = pos;
-		this.uv = uv;
+		this.location = location;
+		this.alignment = alignment;
+		this.offset = new ConstantDimensions(offsetX, offsetY);
 
-		this.height = height;
-		this.width = width;
+		if (width <= 1 || height <= 1) {
+			CocoLogger.warn("Invalid sprite size [x: %d, y: %d", width, height);
+		}
+		size = new Dimensions(width, height);
+		position = alignment.getPosition(getScaledWindowSize(), size, offset);
+		uv = new Coordinates(u, v);
 	}
 
 	public static class Builder {
 
-		private int height;
-		private int width;
+		private int width, height, offsetX, offsetY, u, v;
 		private final ResourceLocation texture;
-		private Coordinates coordinates;
-		private UVCoordinates uv;
+		private Alignment alignment = Alignment.TOP_LEFT;
 
 		private Builder(ResourceLocation texture) {
 			this.texture = texture;
@@ -81,6 +74,10 @@ public class SpriteObject {
 		@Contract(value = "_, _-> new", pure = true)
 		public static Builder create(String namespace, String path) {
 			return new Builder(new ResourceLocation(namespace, path));
+		}
+		@Contract(value = "_-> new", pure = true)
+		public static Builder create(ResourceLocation location) {
+			return new Builder(location);
 		}
 
 		@Contract("_, _ -> this")
@@ -91,74 +88,99 @@ public class SpriteObject {
 			return this;
 		}
 
-		@Contract("_, _ -> this")
-		public Builder withPos(int x, int y) {
+		@Contract("_, _, _ -> this")
+		public Builder withPos(Alignment alignment, int offsetX, int offsetY) {
 
-			coordinates = new Coordinates(x, y);
+			this.alignment = alignment;
+			this.offsetX = offsetX;
+			this.offsetY = offsetY;
 			return this;
 		}
 
-		/**
-		 * Always call this method in the chain after {@link #withSize(int, int)}.
-		 */
+		@Contract("_, -> this")
+		public Builder withPos(Alignment alignment) {
+
+			this.alignment = alignment;
+			return this;
+		}
+
 		@Contract("_, _ -> this")
 		public Builder withUV(int u, int v) {
 
-			uv = new UVCoordinates(Math.min(u, width), Math.min(v, height));
+			this.u = u;
+			this.v = v;
 			return this;
 		}
 
 		@Contract(value = "-> new", pure = true)
 		public SpriteObject build() {
-			return new SpriteObject(texture, coordinates, uv, width, height);
+			return new SpriteObject(texture, alignment, offsetX, offsetY, u, v, width, height);
+		}
+	}
+
+	/**
+	 * Update sprite coordinates to scale with the current window size.
+	 */
+	public void updateScaledPosition() {
+
+		// Calculate scaled position only if window size has changed
+		if (!doesScaledSizeMatch()) {
+			position = alignment.getPosition(getScaledWindowSize(), size, offset);
 		}
 	}
 
 	public ResourceLocation getTexture() {
-		return texture;
+		return location;
 	}
 
 	/**
 	 * @see #getX()
 	 * @see #getY()
 	 */
-	public Coordinates getCoordinates() {
-		return coordinates;
+	public Coordinates getPosition() {
+		return position;
 	}
 
 	/**
 	 * @return the sprite position in the main window along {@code x} axis
 	 */
 	public int getX() {
-		return coordinates.x;
+		return position.x;
 	}
 
 	/**
 	 * @return the sprite position in the main window along {@code y} axis
 	 */
 	public int getY() {
-		return coordinates.y;
+		return position.y;
 	}
 
 	/**
-	 * @return the sprite {@code UV} mapping coordinate along {@code x} axis
+	 * @return sprite {@code UV} mapping coordinates
+	 */
+	public Coordinates getUV() {
+		return uv;
+	}
+
+	/**
+	 * @return sprite {@code UV} mapping coordinate along {@code x} axis
 	 */
 	public int getU() {
-		return uv.u;
+		return uv.x;
 	}
 
 	/**
-	 * @return the sprite {@code UV} mapping coordinate along {@code y} axis
+	 * @return sprite {@code UV} mapping coordinate along {@code y} axis
 	 */
 	public int getV() {
-		return uv.v;
+		return uv.y;
 	}
 
 	public int getWidth() {
-		return width;
+		return size.getWidth();
 	}
 
 	public int getHeight() {
-		return height;
+		return size.getHeight();
 	}
 }

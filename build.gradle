@@ -29,6 +29,20 @@ minecraft {
     // Use non-default mappings at your own risk. they may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
     mappings channel: 'snapshot', version: "${mappingBuild}-${mappingMCVersion}"
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'info'
+
+            mods { cocolib { source sourceSets.test } }
+        }
+    }
 }
 
 dependencies {
@@ -63,10 +77,20 @@ jar {
 // This is the preferred method to reobfuscate your jar file
 jar.finalizedBy('reobfJar')
 
+// Generate sources when building mod
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+build.dependsOn sourcesJar
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact jar
+        }
+        mavenJava(MavenPublication) {
+            artifact sourcesJar
         }
     }
     repositories {
@@ -76,16 +100,20 @@ publishing {
     }
 }
 
-// Generate sources when building mod
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-build.dependsOn sourcesJar
-
 artifacts {
     archives sourcesJar
 }
+
+// Forge doesn't handle loading classes from different modules in dev environment so well.
+task mergeProductionWithTestClasses(type: Copy) {
+    from("$buildDir/classes/java/main/") {
+        // Exclude main mod production class so we don't load 2 mods
+        exclude "**/CocoLib.class"
+    }
+    into "$buildDir/classes/java/test"
+}
+// Remember to manually add testClasses task to run before the launch
+testClasses.finalizedBy('mergeProductionWithTestClasses')
 
 // Process resources on build and make sure that variables are
 // correctly inserted into mods.toml when the mod is built or run
