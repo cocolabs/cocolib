@@ -20,6 +20,6 @@ public class CocoLib {
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
-		CocoLogger.info("CocoLib has been initialized");
+		CocoLogger.info("CocoLib pre-initialized");
 	}
 }
