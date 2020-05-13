@@ -19,32 +19,6 @@ public class GuiElement {
 	 */
 	private final Dimensions SCALED_WINDOW_SIZE = new Dimensions(427, 240);
 
-	/**
-	 * Check if {@code MainWindow} size has changed since last time
-	 * this method was called and update the dimension values if needed
-	 *
-	 * @return {@code true} if {@link #SCALED_WINDOW_SIZE} matches the {@code MainWindow} size.
-	 */
-	boolean doesScaledSizeMatch() {
-
-		MainWindow window = Minecraft.getInstance().getMainWindow();
-
-		if (!SCALED_WINDOW_SIZE.isEqual(window.getScaledWidth(), window.getScaledHeight()))
-		{
-			SCALED_WINDOW_SIZE.update(window.getScaledWidth(), window.getScaledHeight());
-			return false;
-		}
-		else return true;
-	}
-
-	/**
-	 * @return {@code Dimensions} that match the {@link #SCALED_WINDOW_SIZE}.
-	 */
-	@Contract(pure = true)
-	public Dimensions getScaledWindowSize() {
-		return new Dimensions(SCALED_WINDOW_SIZE.getWidth(), SCALED_WINDOW_SIZE.getHeight());
-	}
-
 	public static void bindAndDrawTexture(SpriteObject sprite) {
 
 		Minecraft instance = Minecraft.getInstance();
@@ -75,5 +49,31 @@ public class GuiElement {
 	 */
 	public static void drawTexturedModalRect(int x, int y, int u, int v, int width, int height) {
 		AbstractGui.blit(x, y, u, v, width, height, 256, 256);
+	}
+
+	/**
+	 * Check if {@code MainWindow} size has changed since last time
+	 * this method was called and update the dimension values if needed
+	 *
+	 * @return {@code true} if {@link #SCALED_WINDOW_SIZE} matches the {@code MainWindow} size.
+	 */
+	boolean doesScaledSizeMatch() {
+
+		MainWindow window = Minecraft.getInstance().getMainWindow();
+
+		if (!SCALED_WINDOW_SIZE.isEqual(window.getScaledWidth(), window.getScaledHeight()))
+		{
+			SCALED_WINDOW_SIZE.update(window.getScaledWidth(), window.getScaledHeight());
+			return false;
+		}
+		else return true;
+	}
+
+	/**
+	 * @return {@code Dimensions} that match the {@link #SCALED_WINDOW_SIZE}.
+	 */
+	@Contract(pure = true)
+	public Dimensions getScaledWindowSize() {
+		return new Dimensions(SCALED_WINDOW_SIZE.getWidth(), SCALED_WINDOW_SIZE.getHeight());
 	}
 }

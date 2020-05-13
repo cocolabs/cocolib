@@ -57,17 +57,6 @@ public enum Alignment {
 	};
 
 	/**
-	 * Calculates and returns the position in the {@code 2D} plane for this alignment.
-	 * based on the size of the object we are trying to position, the size of the outer
-	 * frame that holds the object we are trying to position and the additive offset.
-	 *
-	 * @param frame size of the outer frame that holds the object.
-	 * @param size size of the object we are trying to position.
-	 * @param offset coordinate offset from the edge of the frame.
-	 */
-	abstract Coordinates getPosition(Dimensions frame, Dimensions size, Dimensions offset);
-
-	/**
 	 * @return coordinate along {@code x} axis with the given offset applied.
 	 */
 	private static int getOffsetX(Dimensions frame, Dimensions size, Dimensions offset) {
@@ -94,4 +83,15 @@ public enum Alignment {
 	private static int getCenterY(Dimensions frame, Dimensions size) {
 		return frame.getHeight() / 2 - size.getHeight() / 2;
 	}
+
+	/**
+	 * Calculates and returns the position in the {@code 2D} plane for this alignment.
+	 * based on the size of the object we are trying to position, the size of the outer
+	 * frame that holds the object we are trying to position and the additive offset.
+	 *
+	 * @param frame size of the outer frame that holds the object.
+	 * @param size size of the object we are trying to position.
+	 * @param offset coordinate offset from the edge of the frame.
+	 */
+	abstract Coordinates getPosition(Dimensions frame, Dimensions size, Dimensions offset);
 }

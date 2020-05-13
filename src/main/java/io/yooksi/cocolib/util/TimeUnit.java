@@ -106,13 +106,15 @@ public enum TimeUnit {
 
 	/**
 	 * Convert the given time duration for the current {@code TimeUnit} to system ticks.
+	 *
 	 * @return a representation of real ticks elapsed in the given time duration.
-	 *         The value is rounded down to the largest {@code long} that is less
-	 *         than or equal to the calculated value.
+	 * 		The value is rounded down to the largest {@code long} that is less
+	 * 		than or equal to the calculated value.
 	 */
 	public long toTicks(long duration) {
 		return (long) Math.floor(ticks * duration);
 	}
+
 	/**
 	 * Convert the given time duration for the current {@code TimeUnit} to fractional system ticks.
 	 * Use this method when you require a more precise representation of elapsed ticks.
@@ -120,15 +122,18 @@ public enum TimeUnit {
 	public double toFractionalTicks(long duration) {
 		return ticks * duration;
 	}
+
 	/**
 	 * Convert the given time duration for the current {@code TimeUnit} to real-time seconds.
+	 *
 	 * @return a representation of real seconds elapsed in the given time duration.
-	 *         The value is rounded down to the largest {@code long} that is less
-	 *         than or equal to the calculated value.
+	 * 		The value is rounded down to the largest {@code long} that is less
+	 * 		than or equal to the calculated value.
 	 */
 	public long toRealSeconds(long duration) {
 		return Math.round(seconds * duration);
 	}
+
 	/**
 	 * Convert the given time duration for the current {@code TimeUnit} to fractions of real-time seconds.
 	 * The returned value is a {@code double} as a basis for manually measuring other units.
@@ -148,34 +153,39 @@ public enum TimeUnit {
 	public long toRealMinutes(long duration) {
 		return convert(java.util.concurrent.TimeUnit.MINUTES, duration);
 	}
+
 	/**
 	 * Convert the given time duration for the current {@code TimeUnit} to real-time hours.
 	 */
 	public long toRealHours(long duration) {
 		return convert(java.util.concurrent.TimeUnit.HOURS, duration);
 	}
+
 	/**
 	 * Convert the given time duration for the current {@code TimeUnit} to real-time days.
 	 */
 	public long toRealDays(long duration) {
 		return convert(java.util.concurrent.TimeUnit.DAYS, duration);
 	}
+
 	/**
 	 * Convert the given time duration for the current {@code TimeUnit} to real-time weeks.
 	 */
 	public long toRealWeeks(long duration) {
-		return Math.round((float)(toRealDays(duration) / 7));
+		return Math.round((float) (toRealDays(duration) / 7));
 	}
+
 	/**
 	 * Convert the given time duration for the current {@code TimeUnit} to real-time months.
 	 */
 	public long toRealMonths(long duration) {
-		return Math.round((float)(toRealDays(duration) / 30));
+		return Math.round((float) (toRealDays(duration) / 30));
 	}
+
 	/**
 	 * Convert the given time duration for the current {@code TimeUnit} to real-time years.
 	 */
 	public long toRealYears(long duration) {
-		return Math.round((float)(toRealMonths(duration) / 12));
+		return Math.round((float) (toRealMonths(duration) / 12));
 	}
 }

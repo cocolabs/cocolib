@@ -81,7 +81,7 @@ public class DayTime {
 		 *
 		 * @param currentTime current day time in the world.
 		 * @return amount of time elapsed from start of this segment to given
-		 * 		  time expressed in game ticks.
+		 * 		time expressed in game ticks.
 		 */
 		@Range(from = 0, to = 23999)
 		public long getElapsedTime(long currentTime) {

@@ -3,7 +3,8 @@ package io.yooksi.cocolib.lang;
 public class MathTools {
 
 	/** Prevent class instantiation */
-	private MathTools() {}
+	private MathTools() {
+	}
 
 	/**
 	 * Ensure the given value is within specified {@code min-max} range.
@@ -22,7 +23,7 @@ public class MathTools {
 	 * @return {@code true} if the given value is within specified {@code min-max} range.
 	 */
 	public static boolean isValueInRange(int value, int min, int max) {
-		return (value>= min) && (value<= max);
+		return (value >= min) && (value <= max);
 	}
 
 	/**
