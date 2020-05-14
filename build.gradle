@@ -109,7 +109,7 @@ publishing {
 }
 
 artifacts {
-    archives sourcesJar
+    archives sourcesJar, devJar
 }
 
 // Forge doesn't handle loading classes from different modules in dev environment so well.
