@@ -120,7 +120,9 @@ task mergeProductionWithTestClasses(type: Copy) {
     }
     into "$buildDir/classes/java/test"
 }
-// Remember to manually add testClasses task to run before the launch
+// When building classes don't forget test classes
+classes.finalizedBy('testClasses')
+// We need production classes to be present in the test module
 testClasses.finalizedBy('mergeProductionWithTestClasses')
 
 // Process resources on build and make sure that variables are
