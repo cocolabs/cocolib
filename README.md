@@ -48,7 +48,7 @@ dependencies {
 }
 ```
 
-Alternatively you can check the repository [releases](https://github.com/yooksi/CocoLib/releases) and get the latest release from there. 
+Alternatively you can check the repository [releases](https://github.com/yooksi/CocoLib/releases) and get the latest release from there.  
 Each repository  production release contains three `jar` types that you can download:
 
 - `-dev.jar` is a non-obfuscated version of the jar used by developers.
@@ -69,7 +69,7 @@ Players will want only the production jar which they should treat as a standard 
 
 - Install the library like any other mod by placing the production jar in `mods` directory. 
 
-  Note that the library will not do anything by itself, it is only used as a dependency by other mods. 
+  Note that the library will not do anything by itself, it is only used as a dependency by other mods.  
   Use it only if you have an installed mod that depends on this library.
 
 ## Running tests
@@ -88,4 +88,3 @@ Majority of tests for Minecraft mods are integration tests and unfortunately For
 This library is licensed under [General Public License v3.0](https://www.gnu.org/licenses).
 
 Software that depends on, is built upon or derived from this library is conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed  work, under the same license. Copyright and license notices must be preserved.
-
