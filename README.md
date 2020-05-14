@@ -1,5 +1,7 @@
 # CocoLib
 
+[![JitPack](https://jitpack.io/v/yooksi/CocoLib.svg)](https://jitpack.io/#yooksi/CocoLib) ![License](https://img.shields.io/github/license/yooksi/CocoLib) ![Discord](https://img.shields.io/discord/710517912485494794)
+
 CocoLib is a Minecraft modding library for Forge by introducing simple and clean solutions to complex problems developers usually encounter when creating Minecraft Forge mods.
 
 ## Motivation
