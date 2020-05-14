@@ -2,11 +2,11 @@
 
 [![JitPack](https://jitpack.io/v/yooksi/CocoLib.svg)](https://jitpack.io/#yooksi/CocoLib) [![License](https://img.shields.io/github/license/yooksi/CocoLib)](https://www.gnu.org/licenses/) [![Discord](https://img.shields.io/discord/710517912485494794)](https://discord.gg/dKY9xW)
 
-CocoLib is a Minecraft modding library for Forge by introducing simple and clean solutions to complex problems developers usually encounter when creating Minecraft Forge mods.
+CocoLib is a Minecraft modding library for Forge that introduces simple and clean solutions to complex problems developers usually encounter when creating Minecraft mods.
 
 ## Motivation
 
-Creating mods for Minecraft can prove to be a challenging and at times frustrating experience. Developers are required to have a good understanding of both Java and Forge when implementing more complex modding ideas. In addition to this working on multiple projects that are trying to implement similar concepts or using similar method to accomplish tasks requires a fair amount of code duplication.
+Creating mods for Minecraft can prove to be a challenging and at times frustrating experience. Developers are required to have a good understanding of both Java and Forge when implementing more complex mod ideas. In addition to this, working on multiple projects that are trying to implement similar concepts or using similar method to accomplish tasks requires a fair amount of code duplication.
 
 CocoLib does a lot of this for you by providing simple and efficient ways of solving many problems without having to spend an unreasonable amount of time researching implementation practices and resort to code duplication. It tries to do this while maintaining best Java and Forge practices.
 
@@ -26,13 +26,9 @@ CocoLib is hosted on [JitPack](https://jitpack.io/#yooksi/CocoLib) so head over 
 Here is an example of how to implement the library with Gradle:
 
 ```groovy
-buildscript {
-	...
-}
-
 // Definines where Gradle should look for declared dependencies
-// Declare this after the buildscript block (first script block)
-// and before MinecraftForge Gradle plugin configuration
+// Declare this AFTER the buildscript block (first script block)
+// and BEFORE MinecraftForge Gradle plugin configuration
 repositories {
 	...
 	maven { url 'https://jitpack.io' }
@@ -56,7 +52,7 @@ Alternatively you can check the repository [releases](https://github.com/yooksi/
 Each repository  production release contains three `jar` types that you can download:
 
 - `-dev.jar` is a non-obfuscated version of the jar used by developers.
-- `-sources.jar` contains source files for production and dev jar used by developers.
+- `-sources.jar` contains project source files used by developers.
 - `-.jar` is an obfuscated production-ready jar used (mostly) by players. 
 
 Developers will want either the dev or production jar (optionally) accompanied by sources jar to make reading and understanding the library code easier when working with their mods.
@@ -71,16 +67,17 @@ Players will want only the production jar which they should treat as a standard 
 
 ### Players
 
-- Install the library like any other mod by place the production jar in `run/mods` directory. Note that the library will not do anything by itself, it is only used as a dependency by other mods. Use it only if you have an installed mod that depends on this library.
+- Install the library like any other mod by placing the production jar in `mods` directory. 
+
+  Note that the library will not do anything by itself, it is only used as a dependency by other mods. 
+  Use it only if you have an installed mod that depends on this library.
 
 ## Running tests
 
 All test classes can be found in the `test` module under `src/test/java`. 
 
-Majority of tests for Minecraft mods will be integration tests so we will focus on those.
 
-
-Forge doesn't handle well loading classes from different modules in development environment so before running integration tests you should be aware of a couple of things:
+Majority of tests for Minecraft mods are integration tests and unfortunately Forge doesn't handle well loading classes from different modules in development environment so before running integration tests you should be aware of a couple of things:
 
 - Running `genIntelliJRuns` gradle task generates run configurations for the test `sourceSet`.
 - In addition to generating production classes the`classes` gradle task will also generate test classes. This means that any task that involves `classes` task will also generate test classes (i.e. `build` task).
