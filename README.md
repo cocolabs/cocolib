@@ -39,12 +39,13 @@ minecraft {
 }
 
 dependencies {
-    // Specify the version of Minecraft to use 
+    // Specify the version of Minecraft to use
     minecraft "net.minecraftforge:forge:${minecraftVersion}-${forgeVersion}"
     
-    // Improve my modding experience
-    // Replace <version> with the fully qualified version number
-    implementation 'com.github.yooksi:CocoLib:<version>'
+    // Define 'cocoLibVerion' property in gradle.properties
+    // with fully qualified version number you want to use
+    // i.e cocoLibVersion=1.15.2-0.1.1
+    implementation fg.deobf("com.github.yooksi:CocoLib:${cocoLibVerion}")
 }
 ```
 
