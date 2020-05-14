@@ -77,7 +77,7 @@ Players will want only the production jar which they should treat as a standard 
 All test classes can be found in the `test` module under `src/test/java`. 
 
 
-Majority of tests for Minecraft mods are integration tests and unfortunately Forge doesn't handle well loading classes from different modules in development environment so before running integration tests you should be aware of a couple of things:
+Majority of Minecraft mod tests are integration tests and unfortunately Forge doesn't handle well loading classes from different modules in development environment so before running integration tests you should be aware of a couple of things:
 
 - Running `genIntelliJRuns` gradle task generates run configurations for the test `sourceSet`.
 - In addition to generating production classes the`classes` gradle task will also generate test classes. This means that any task that involves `classes` task will also generate test classes (i.e. `build` task).
