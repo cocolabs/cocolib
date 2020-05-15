@@ -67,7 +67,7 @@ jar {
             "Specification-Title": project.modId,
             "Specification-Vendor": "${groupName}",
             "Specification-Version": "1", // We are version 1 of ourselves
-            "Implementation-Title": project.name,
+            "Implementation-Title": project.modId,
             "Implementation-Version": "${version}",
             "Implementation-Vendor": "${groupName}",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
