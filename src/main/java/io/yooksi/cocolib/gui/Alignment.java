@@ -26,27 +26,27 @@ public enum Alignment {
 	TOP_RIGHT {
 		@Override
 		Coordinates getPosition(Dimensions frame, Dimensions size, Dimensions offset) {
-			return new Coordinates(Alignment.getOffsetX(frame, offset, size), offset.getHeight());
+			return new Coordinates(Alignment.getOffsetX(frame, size, offset), offset.getHeight());
 		}
 	},
 	TOP_CENTER {
 		@Override
 		Coordinates getPosition(Dimensions frame, Dimensions size, Dimensions offset) {
-			return new Coordinates(Alignment.getCenterX(frame, size), offset.getHeight());
+			return new Coordinates(Alignment.getCenterX(frame, size, offset), offset.getHeight());
 		}
 	},
 	BOTTOM_LEFT {
 		@Override
 		Coordinates getPosition(Dimensions frame, Dimensions size, Dimensions offset) {
-			return new Coordinates(offset.getWidth(), Alignment.getOffsetY(frame, offset, size));
+			return new Coordinates(offset.getWidth(), Alignment.getOffsetY(frame, size, offset));
 		}
 	},
 	BOTTOM_RIGHT {
 		@Override
 		Coordinates getPosition(Dimensions frame, Dimensions size, Dimensions offset) {
 			return new Coordinates(
-					Alignment.getOffsetX(frame, offset, size),
-					Alignment.getOffsetY(frame, offset, size)
+					Alignment.getOffsetX(frame, size, offset),
+					Alignment.getOffsetY(frame, size, offset)
 			);
 		}
 	},
@@ -54,8 +54,8 @@ public enum Alignment {
 		@Override
 		Coordinates getPosition(Dimensions frame, Dimensions size, Dimensions offset) {
 			return new Coordinates(
-					Alignment.getCenterX(frame, size),
-					Alignment.getOffsetY(frame, offset, size)
+					Alignment.getCenterX(frame, size, offset),
+					Alignment.getOffsetY(frame, size, offset)
 			);
 		}
 	},
@@ -63,8 +63,8 @@ public enum Alignment {
 		@Override
 		Coordinates getPosition(Dimensions frame, Dimensions size, Dimensions offset) {
 			return new Coordinates(
-					Alignment.getCenterX(frame, size),
-					Alignment.getCenterY(frame, size)
+					Alignment.getCenterX(frame, size, offset),
+					Alignment.getCenterY(frame, size, offset)
 			);
 		}
 	};
@@ -73,28 +73,28 @@ public enum Alignment {
 	 * @return coordinate along {@code x} axis with the given offset applied.
 	 */
 	private static int getOffsetX(Dimensions frame, Dimensions size, Dimensions offset) {
-		return frame.getWidth() - offset.getWidth() - size.getWidth();
+		return frame.getWidth() - size.getWidth() - offset.getWidth();
 	}
 
 	/**
 	 * @return coordinate along {@code y} axis with the given offset applied.
 	 */
 	private static int getOffsetY(Dimensions frame, Dimensions size, Dimensions offset) {
-		return frame.getHeight() - offset.getHeight() - size.getHeight();
+		return frame.getHeight() - size.getHeight() - offset.getHeight();
 	}
 
 	/**
 	 * @return <b>centered</b> coordinate along {@code x} axis with the given offset applied.
 	 */
-	private static int getCenterX(Dimensions frame, Dimensions size) {
-		return frame.getWidth() / 2 - size.getWidth() / 2;
+	private static int getCenterX(Dimensions frame, Dimensions size, Dimensions offset) {
+		return frame.getWidth() / 2 - size.getWidth() / 2 + offset.getWidth();
 	}
 
 	/**
 	 * @return <b>centered</b> coordinate along {@code y} axis with the given offset applied.
 	 */
-	private static int getCenterY(Dimensions frame, Dimensions size) {
-		return frame.getHeight() / 2 - size.getHeight() / 2;
+	private static int getCenterY(Dimensions frame, Dimensions size, Dimensions offset) {
+		return frame.getHeight() / 2 - size.getHeight() / 2 + offset.getHeight();
 	}
 
 	/**
