@@ -60,7 +60,7 @@ Developers will want either the dev or production jar (optionally) accompanied b
 
 Players will want only the production jar which they should treat as a standard game mod.
 
- ## How to use?
+ ## How to use it?
 
 ### Developers
 
