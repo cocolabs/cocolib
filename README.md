@@ -21,9 +21,21 @@ CocoLib does a lot of this for you by providing simple and efficient ways of sol
 
 ## Where to get it?
 
+Each repository production and maven artifacts release contains three `jar` types that you can download:
+
+- `-dev.jar` is a non-obfuscated version of the jar used by developers.
+- `-sources.jar` contains project source files used by developers.
+- `-.jar` is an obfuscated production-ready jar mostly used by players. 
+
+**Developers** will want either the dev or production jar (optionally) accompanied by sources jar to make reading and understanding the library code easier when working with their mods.
+
+**Players** will want only the production jar found in the repository release section on [Github](#github) which they should treat as a standard game mod (see [How to use it](#players) section for more information).
+
+### Maven
+
 CocoLib is hosted on [JitPack](https://jitpack.io/#yooksi/CocoLib) so head over there and get the latest release.
 
-Here is an example of how to implement the library with Gradle:
+Here is the **recommended** way of getting the library in your project:
 
 ```groovy
 // Definines where Gradle should look for declared dependencies
@@ -42,23 +54,23 @@ dependencies {
     // Specify the version of Minecraft to use
     minecraft "net.minecraftforge:forge:${minecraftVersion}-${forgeVersion}"
     
-    // Define 'cocoLibVerion' property in gradle.properties
-    // with fully qualified version number you want to use
-    // i.e cocoLibVersion=1.15.2-0.1.1
-    implementation fg.deobf("com.github.yooksi:CocoLib:${cocoLibVerion}")
+     // Improve my modding experience!
+    implementation "com.github.yooksi:CocoLib:${cocoLibVersion}:dev"
 }
 ```
 
-Alternatively you can check the repository [releases](https://github.com/yooksi/CocoLib/releases) and get the latest release from there.  
-Each repository  production release contains three `jar` types that you can download:
+*Note that the `cocoLibVersion` property in this example was defined in `gradle.properties` to make accessing and reading version numbers easier. You should update the property (or just replace the variable) to a fully qualified version of the library you want to use.*
 
-- `-dev.jar` is a non-obfuscated version of the jar used by developers.
-- `-sources.jar` contains project source files used by developers.
-- `-.jar` is an obfuscated production-ready jar used (mostly) by players. 
+The build will try to resolve the *deobfuscated* version of the library built for use by developers (indicated by the `dev` classifier) and add it to `implementation` configuration. This is by far the simplest way of making the library available to your mod during compile and runtime. 
 
-Developers will want either the dev or production jar (optionally) accompanied by sources jar to make reading and understanding the library code easier when working with their mods.
+Another way to get the library would be to use `fg.deobf` right after declaring the configuration type to indicate that the production jar should be *deobfuscated* after being resolved. This is not necessary and just adds extra work during build phase, this is why the project provides the `dev` jar. Besides, this way you need to manually attach source files since the created jar ends up in Forge cache folder.  
 
-Players will want only the production jar which they should treat as a standard game mod.
+### Github
+
+This is the **recommended** way to obtain the production jar for library users.  
+*Developers should only use this way if JitPack is not working or they feel adventurous.*
+
+Check the [releases](https://github.com/yooksi/CocoLib/releases) section in project repository page to get the latest release. 
 
  ## How to use it?
 
