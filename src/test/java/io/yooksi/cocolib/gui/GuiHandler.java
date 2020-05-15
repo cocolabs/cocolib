@@ -46,6 +46,14 @@ public class GuiHandler {
 			.withPos(Alignment.BOTTOM_RIGHT, 5, 5)
 			.withUV(0, 96).withSize(37, 46).build();
 
+	public final SpriteObject TOP_CENTER_ELEMENT = SpriteObject.Builder.create(MAPPED_TEST)
+			.withPos(Alignment.TOP_CENTER, -20, 25)
+			.withUV(74, 106).withSize(49, 10).build();
+
+	public final SpriteObject BOTTOM_CENTER_ELEMENT = SpriteObject.Builder.create(MAPPED_TEST)
+			.withPos(Alignment.BOTTOM_CENTER, 20, 25)
+			.withUV(74, 96).withSize(49, 10).build();
+
 	public final SpriteObject CROSSHAIRS = SpriteObject.Builder.create(MAPPED_TEST)
 			.withPos(Alignment.CENTER).withUV(181, 37).withSize(19, 20).build();
 
@@ -61,13 +69,19 @@ public class GuiHandler {
 		// This element should draw in top right corner of the screen
 		GuiElement.bindAndDrawTexture(TOP_RIGHT_ELEMENT);
 
-		// This element should draw in the middle of the screen
-		GuiElement.bindAndDrawTexture(CROSSHAIRS);
-
 		// This element should draw in the bottom left corner of the screen
 		GuiElement.bindAndDrawTexture(BOTTOM_LEFT_ELEMENT);
 
 		// This element should draw in the bottom right corner of the screen
 		GuiElement.bindAndDrawTexture(BOTTOM_RIGHT_ELEMENT);
+
+		// This element should draw in the middle of the screen
+		GuiElement.bindAndDrawTexture(CROSSHAIRS);
+
+		// This element should draw in the top center of the screen
+		GuiElement.bindAndDrawTexture(TOP_CENTER_ELEMENT);
+
+		// This element should draw in the bottom center of the screen
+		GuiElement.bindAndDrawTexture(BOTTOM_CENTER_ELEMENT);
 	}
 }
