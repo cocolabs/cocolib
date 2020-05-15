@@ -86,6 +86,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 build.dependsOn sourcesJar
 
 task devJar(type: Jar, dependsOn: classes) {
+    baseName = project.modId
     classifier = 'dev'
     from sourceSets.main.output
 }
