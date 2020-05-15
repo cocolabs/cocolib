@@ -11,6 +11,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
+apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'java'
 
@@ -60,6 +61,7 @@ dependencies {
 
 // Get properties into the manifest for reading by the runtime..
 jar {
+    from sourceSets.main.output
     manifest {
         attributes([
             "Specification-Title": project.modId,
@@ -72,7 +74,6 @@ jar {
         ])
     }
 }
-
 // Example configuration to allow publishing using the maven-publish task
 // This is the preferred method to reobfuscate your jar file
 jar.finalizedBy('reobfJar')
@@ -85,6 +86,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 build.dependsOn sourcesJar
 
 task devJar(type: Jar, dependsOn: classes) {
+    baseName = project.modId
     classifier = 'dev'
     from sourceSets.main.output
 }
@@ -109,7 +111,7 @@ publishing {
 }
 
 artifacts {
-    archives sourcesJar
+    archives sourcesJar, devJar
 }
 
 // Forge doesn't handle loading classes from different modules in dev environment so well.
