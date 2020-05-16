@@ -29,7 +29,7 @@ public class SpriteObject extends GuiElement {
 	private final ResourceLocation location;
 
 	/** Alignment of the sprite relative to main window screen. */
-	public final Alignment alignment;
+	private Alignment alignment;
 
 	/**
 	 * Values to offset from the edge of the main window screen.
@@ -153,6 +153,26 @@ public class SpriteObject extends GuiElement {
 	public void offset(int offsetX, int offsetY) {
 		this.offset.update(offsetX, offsetY);
 	}
+
+	/**
+	 * Update sprite alignment relative to main window screen.
+	 */
+	public void align(Alignment alignment) {
+		this.alignment = alignment;
+	}
+
+	/**
+	 * Update sprite alignment and offset relative to main window screen.
+	 *
+	 * @see #align(Alignment)
+	 * @see #offset(int, int)
+	 */
+	public void align(Alignment alignment, int offsetX, int offsetY) {
+
+		align(alignment);
+		offset(offsetX, offsetY);
+	}
+
 	public ResourceLocation getTexture() {
 		return location;
 	}
