@@ -42,12 +42,12 @@ Here is the **recommended** way of getting the library in your project:
 // Declare this AFTER the buildscript block (first script block)
 // and BEFORE MinecraftForge Gradle plugin configuration
 repositories {
-	...
-	maven { url 'https://jitpack.io' }
+    ...
+    maven { url 'https://jitpack.io' }
 }
 
 minecraft {
-	...
+    ...
 }
 
 dependencies {
