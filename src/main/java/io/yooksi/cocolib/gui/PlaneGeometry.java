@@ -108,6 +108,11 @@ public class PlaneGeometry {
 		public int getHeight() {
 			return height;
 		}
+
+		@Override
+		public String toString() {
+			return String.format("[ %d, %d ]", width, height);
+		}
 	}
 
 	/**
