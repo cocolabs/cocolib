@@ -135,11 +135,12 @@ public class SpriteObject extends GuiElement {
 
 	/**
 	 * Update sprite coordinates to scale with the current window size.
+	 * @param force force update regardless of window size change
 	 */
-	public void updateScaledPosition() {
+	public void updateScaledPosition(boolean force) {
 
 		// Calculate scaled position only if window size has changed
-		if (!doesScaledSizeMatch()) {
+		if (force || !doesScaledSizeMatch()) {
 			position = alignment.getPosition(getScaledWindowSize(), size, offset);
 		}
 	}
