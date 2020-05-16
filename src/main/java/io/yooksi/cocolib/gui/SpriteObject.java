@@ -61,6 +61,11 @@ public class SpriteObject extends GuiElement {
 		uv = new Coordinates(u, v);
 	}
 
+	protected SpriteObject(Builder builder) {
+		this(builder.texture, builder.alignment, builder.offsetX,
+				builder.offsetY, builder.u, builder.v, builder.width, builder.height);
+	}
+
 	public static class Builder {
 
 		private int width, height, offsetX, offsetY, u, v;
