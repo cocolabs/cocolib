@@ -37,7 +37,7 @@ public class GuiElement {
 		Minecraft instance = Minecraft.getInstance();
 		TextureManager manager = instance.getTextureManager();
 
-		sprite.updateScaledPosition();
+		sprite.updateScaledPosition(false);
 
 		// Bind sprite map
 		manager.bindTexture(sprite.getTexture());

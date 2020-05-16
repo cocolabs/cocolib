@@ -13,6 +13,8 @@
  */
 package io.yooksi.cocolib.gui;
 
+import org.jetbrains.annotations.Contract;
+
 public class PlaneGeometry {
 
 	public enum Axis { X, Y }
@@ -86,6 +88,14 @@ public class PlaneGeometry {
 		}
 
 		/**
+		 * @return dimensions in an {@code int} array.
+		 */
+		@Contract(value = "-> new", pure = true)
+		public int[] toArray() {
+			return new int[] { width, height };
+		}
+
+		/**
 		 * @return size of the plane along {@code x} axis.
 		 */
 		public int getWidth() {
@@ -97,6 +107,11 @@ public class PlaneGeometry {
 		 */
 		public int getHeight() {
 			return height;
+		}
+
+		@Override
+		public String toString() {
+			return String.format("[ %d, %d ]", width, height);
 		}
 	}
 

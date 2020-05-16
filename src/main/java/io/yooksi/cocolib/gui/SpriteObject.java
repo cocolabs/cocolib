@@ -29,7 +29,7 @@ public class SpriteObject extends GuiElement {
 	private final ResourceLocation location;
 
 	/** Alignment of the sprite relative to main window screen. */
-	public final Alignment alignment;
+	private Alignment alignment;
 
 	/**
 	 * Values to offset from the edge of the main window screen.
@@ -51,7 +51,7 @@ public class SpriteObject extends GuiElement {
 
 		this.location = location;
 		this.alignment = alignment;
-		this.offset = new ConstantDimensions(offsetX, offsetY);
+		this.offset = new Dimensions(offsetX, offsetY);
 
 		if (width <= 1 || height <= 1) {
 			CocoLogger.warn("Invalid sprite size [x: %d, y: %d", width, height);
@@ -59,6 +59,11 @@ public class SpriteObject extends GuiElement {
 		size = new Dimensions(width, height);
 		position = alignment.getPosition(getScaledWindowSize(), size, offset);
 		uv = new Coordinates(u, v);
+	}
+
+	protected SpriteObject(Builder builder) {
+		this(builder.texture, builder.alignment, builder.offsetX,
+				builder.offsetY, builder.u, builder.v, builder.width, builder.height);
 	}
 
 	public static class Builder {
@@ -88,6 +93,11 @@ public class SpriteObject extends GuiElement {
 			return this;
 		}
 
+		@Contract("_ -> this")
+		public Builder withSize(Dimensions size) {
+			return withSize(size.getWidth(), size.getHeight());
+		}
+
 		@Contract("_, _, _ -> this")
 		public Builder withPos(Alignment alignment, int offsetX, int offsetY) {
 
@@ -95,6 +105,11 @@ public class SpriteObject extends GuiElement {
 			this.offsetX = offsetX;
 			this.offsetY = offsetY;
 			return this;
+		}
+
+		@Contract("_, _ -> this")
+		public Builder withPos(Alignment alignment, Dimensions offset) {
+			return withPos(alignment, offset.getWidth(), offset.getHeight());
 		}
 
 		@Contract("_, -> this")
@@ -120,13 +135,43 @@ public class SpriteObject extends GuiElement {
 
 	/**
 	 * Update sprite coordinates to scale with the current window size.
+	 * @param force force update regardless of window size change
 	 */
-	public void updateScaledPosition() {
+	public void updateScaledPosition(boolean force) {
 
 		// Calculate scaled position only if window size has changed
-		if (!doesScaledSizeMatch()) {
+		if (force || !doesScaledSizeMatch()) {
 			position = alignment.getPosition(getScaledWindowSize(), size, offset);
 		}
+	}
+
+	/**
+	 * Update sprite offset relative to main window screen.
+	 *
+	 * @param offsetX coordinate offset on {@code x} axis.
+	 * @param offsetY coordinate offset on {@code y} axis.
+	 */
+	public void offset(int offsetX, int offsetY) {
+		this.offset.update(offsetX, offsetY);
+	}
+
+	/**
+	 * Update sprite alignment relative to main window screen.
+	 */
+	public void align(Alignment alignment) {
+		this.alignment = alignment;
+	}
+
+	/**
+	 * Update sprite alignment and offset relative to main window screen.
+	 *
+	 * @see #align(Alignment)
+	 * @see #offset(int, int)
+	 */
+	public void align(Alignment alignment, int offsetX, int offsetY) {
+
+		align(alignment);
+		offset(offsetX, offsetY);
 	}
 
 	public ResourceLocation getTexture() {
