@@ -51,7 +51,7 @@ public class SpriteObject extends GuiElement {
 
 		this.location = location;
 		this.alignment = alignment;
-		this.offset = new ConstantDimensions(offsetX, offsetY);
+		this.offset = new Dimensions(offsetX, offsetY);
 
 		if (width <= 1 || height <= 1) {
 			CocoLogger.warn("Invalid sprite size [x: %d, y: %d", width, height);
@@ -144,6 +144,15 @@ public class SpriteObject extends GuiElement {
 		}
 	}
 
+	/**
+	 * Update sprite offset relative to main window screen.
+	 *
+	 * @param offsetX coordinate offset on {@code x} axis.
+	 * @param offsetY coordinate offset on {@code y} axis.
+	 */
+	public void offset(int offsetX, int offsetY) {
+		this.offset.update(offsetX, offsetY);
+	}
 	public ResourceLocation getTexture() {
 		return location;
 	}
