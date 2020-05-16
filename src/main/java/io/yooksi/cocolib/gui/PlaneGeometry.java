@@ -13,6 +13,8 @@
  */
 package io.yooksi.cocolib.gui;
 
+import org.jetbrains.annotations.Contract;
+
 public class PlaneGeometry {
 
 	public enum Axis { X, Y }
@@ -83,6 +85,14 @@ public class PlaneGeometry {
 		 */
 		public boolean isEqual(int width, int height) {
 			return this.width == width && this.height == height;
+		}
+
+		/**
+		 * @return dimensions in an {@code int} array.
+		 */
+		@Contract(value = "-> new", pure = true)
+		public int[] toArray() {
+			return new int[] { width, height };
 		}
 
 		/**
