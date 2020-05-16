@@ -93,6 +93,11 @@ public class SpriteObject extends GuiElement {
 			return this;
 		}
 
+		@Contract("_ -> this")
+		public Builder withSize(Dimensions size) {
+			return withSize(size.getWidth(), size.getHeight());
+		}
+
 		@Contract("_, _, _ -> this")
 		public Builder withPos(Alignment alignment, int offsetX, int offsetY) {
 
@@ -100,6 +105,11 @@ public class SpriteObject extends GuiElement {
 			this.offsetX = offsetX;
 			this.offsetY = offsetY;
 			return this;
+		}
+
+		@Contract("_, _ -> this")
+		public Builder withPos(Alignment alignment, Dimensions offset) {
+			return withPos(alignment, offset.getWidth(), offset.getHeight());
 		}
 
 		@Contract("_, -> this")
