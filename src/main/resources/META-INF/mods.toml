@@ -22,3 +22,17 @@ credits="Thanks to Java and Forge team"
 authors="yooksi"
 # The description text for the mod (multi line!)
 description='''Simple Minecraft modding library.'''
+
+[[dependencies.cocolib]]
+    modId="forge"
+    mandatory=true
+    versionRange="[31.2.0,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.cocolib]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.15.2]"
+    ordering="NONE"
+    side="BOTH"
