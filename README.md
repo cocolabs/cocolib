@@ -1,6 +1,6 @@
 <p align="center">
 	<a href="https://gitmoji.carloscuesta.me">
-		<img src="https://github.com/yooksi/cocolib/blob/banner/assets/banner_white.png">
+		<img src="./assets/banner_white.png">
 	</a>
 </p>
 <p align="center">
