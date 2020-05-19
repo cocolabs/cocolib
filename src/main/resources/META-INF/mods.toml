@@ -6,22 +6,14 @@ modLoader="javafml"
 loaderVersion="[31,)"
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]]
-# A URL to refer people to when problems occur with this mod
-issueTrackerURL="https://github.com/yooksi/cocolib/issues"
-# The modid of the mod
-modId="cocolib"
-# The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-version="${version}"
- # A display name for the mod
-displayName="CocoLib"
-# A URL for the "homepage" for this mod, displayed in the mod UI
-displayURL="https://github.com/yooksi/cocolib"
-# A text field displayed in the mod UI
-credits="Thanks to Java and Forge team"
-# A text field displayed in the mod UI
-authors="yooksi"
-# The description text for the mod (multi line!)
-description='''Simple Minecraft modding library.'''
+    issueTrackerURL="https://github.com/yooksi/cocolib/issues"
+    modId="cocolib"
+    version="${version}"
+    displayName="CocoLib"
+    displayURL="https://github.com/yooksi/cocolib"
+    credits="Thanks to Java and Forge team"
+    authors="yooksi"
+    description='''Simple Minecraft modding library.'''
 
 [[dependencies.cocolib]]
     modId="forge"
