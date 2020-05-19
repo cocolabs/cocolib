@@ -1,16 +1,8 @@
 # The overall format is standard TOML format, v0.5.0.
-# Find more information on toml format here:  https://github.com/toml-lang/toml
-# The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
 modLoader="javafml"
-# A version range to match for said mod loader - for regular FML @Mod it will be the forge version
 loaderVersion="[31,)"
-# A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]]
-# The modid of the mod
-modId="cocolib"
-# The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-version="${version}"
- # A display name for the mod
-displayName="CocoLib"
-# The description text for the mod (multi line!)
-description='''Simple Minecraft modding library.'''
+    modId="cocolib"
+    version="${version}"
+    displayName="CocoLib"
+    description='''Simple Minecraft modding library.'''
