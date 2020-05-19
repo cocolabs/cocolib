@@ -1,7 +1,5 @@
 <p align="center">
-	<a href="https://gitmoji.carloscuesta.me">
-		<img src="./assets/banner_white.png">
-	</a>
+    <img src="./assets/banner_light.png">
 </p>
 <p align="center">
     <a href="https://jitpack.io/#yooksi/cocolib">
