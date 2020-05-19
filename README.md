@@ -14,6 +14,7 @@
         <img src="https://img.shields.io/discord/710517912485494794">
     </a>
 </p>
+
 ## About
 
 CocoLib is a Minecraft modding library for Forge that introduces simple and clean solutions to complex problems developers usually encounter when creating Minecraft mods.
