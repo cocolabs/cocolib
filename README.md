@@ -11,7 +11,7 @@
         <img src="https://img.shields.io/github/license/yooksi/CocoLib">
     </a>
     <a href="https://discord.gg/dKY9xW">
-        <img src="https://img.shields.io/discord/710517912485494794"
+        <img src="https://img.shields.io/discord/710517912485494794">
     </a>
 </p>
 
