@@ -61,7 +61,7 @@ dependencies {
 
 // Get properties into the manifest for reading by the runtime..
 jar {
-    from sourceSets.main.output
+    from './assets/banner_game.png'
     manifest {
         attributes([
             "Specification-Title": project.modId,

@@ -13,6 +13,7 @@ loaderVersion="[31,)"
     displayURL="https://github.com/yooksi/cocolib"
     credits="Thanks to Java and Forge team"
     authors="yooksi & Coco"
+    logoFile="banner_game.png"
     description='''Simple Minecraft modding library.'''
 
 [[dependencies.cocolib]]
