@@ -5,6 +5,9 @@
     <a href="https://jitpack.io/#yooksi/cocolib">
         <img src="https://jitpack.io/v/yooksi/CocoLib.svg">
     </a>
+    <a href="https://curse.nikky.moe/api/url/384336">
+		<img src="https://curse.nikky.moe/api/img/384336?logo">
+	</a>
     <a href="https://www.gnu.org/licenses/">
         <img src="https://img.shields.io/github/license/yooksi/CocoLib">
     </a>
