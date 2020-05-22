@@ -28,7 +28,7 @@ CocoLib does a lot of this for you by providing simple and efficient ways of sol
 - Provides a way to store and update sprite render data in object instances.
 - Provides support for positioning, aligning and drawing sprites on screen.
 - Contains general purpose modding utility methods and classes.
-- Comes with a set of useful custom annotations. 
+- Comes with a set of useful custom annotations.
 
 ## Where to get it?
 
@@ -36,7 +36,7 @@ Each repository production and maven artifacts release contains three `jar` type
 
 - `-dev.jar` is a non-obfuscated version of the jar used by developers.
 - `-sources.jar` contains project source files used by developers.
-- `-.jar` is an obfuscated production-ready jar mostly used by players. 
+- `-.jar` is an obfuscated production-ready jar mostly used by players.
 
 **Developers** will want either the dev or production jar (optionally) accompanied by sources jar to make reading and understanding the library code easier when working with their mods.
 
@@ -64,7 +64,7 @@ minecraft {
 dependencies {
     // Specify the version of Minecraft to use
     minecraft "net.minecraftforge:forge:${minecraftVersion}-${forgeVersion}"
-    
+
      // Improve my modding experience!
     implementation "com.github.yooksi:CocoLib:${cocoLibVersion}:dev"
 }
@@ -72,16 +72,16 @@ dependencies {
 
 *Note that the `cocoLibVersion` property in this example was defined in `gradle.properties` to make accessing and reading version numbers easier. You should update the property (or just replace the variable) to a fully qualified version of the library you want to use.*
 
-The build will try to resolve the *deobfuscated* version of the library built for use by developers (indicated by the `dev` classifier) and add it to `implementation` configuration. This is by far the simplest way of making the library available to your mod during compile and runtime. 
+The build will try to resolve the *deobfuscated* version of the library built for use by developers (indicated by the `dev` classifier) and add it to `implementation` configuration. This is by far the simplest way of making the library available to your mod during compile and runtime.
 
-Another way to get the library would be to use `fg.deobf` right after declaring the configuration type to indicate that the production jar should be *deobfuscated* after being resolved. This is not necessary and just adds extra work during build phase, this is why the project provides the `dev` jar. Besides, this way you need to manually attach source files since the created jar ends up in Forge cache folder.  
+Another way to get the library would be to use `fg.deobf` right after declaring the configuration type to indicate that the production jar should be *deobfuscated* after being resolved. This is not necessary and just adds extra work during build phase, this is why the project provides the `dev` jar. Besides, this way you need to manually attach source files since the created jar ends up in Forge cache folder.
 
 ### Github
 
-This is the **recommended** way to obtain the production jar for library users.  
+This is the **recommended** way to obtain the production jar for library users.
 *Developers should only use this way if JitPack is not working or they feel adventurous.*
 
-Check the [releases](https://github.com/yooksi/CocoLib/releases) section in project repository page to get the latest release. 
+Check the [releases](https://github.com/yooksi/CocoLib/releases) section in project repository page to get the latest release.
 
  ## How to use it?
 
@@ -91,14 +91,14 @@ Check the [releases](https://github.com/yooksi/CocoLib/releases) section in proj
 
 ### Players
 
-- Install the library like any other mod by placing the production jar in `mods` directory. 
+- Install the library like any other mod by placing the production jar in `mods` directory.
 
-  Note that the library will not do anything by itself, it is only used as a dependency by other mods.  
+  Note that the library will not do anything by itself, it is only used as a dependency by other mods.
   Use it only if you have an installed mod that depends on this library.
 
 ## Running tests
 
-All test classes can be found in the `test` module under `src/test/java`. 
+All test classes can be found in the `test` module under `src/test/java`.
 
 
 Majority of Minecraft mod tests are integration tests and unfortunately Forge doesn't handle well loading classes from different modules in development environment so before running integration tests you should be aware of a couple of things:
