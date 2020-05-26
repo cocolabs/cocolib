@@ -84,7 +84,7 @@ dependencies {
 
 The build will try to resolve the *deobfuscated* version of the library built for use by developers (indicated by the `dev` classifier) and add it to `implementation` configuration. This is by far the simplest way of making the library available to your mod during compile and runtime.
 
-Another way to get the library would be to use `fg.deobf` right after declaring the configuration type to indicate that the production jar should be *deobfuscated* after being resolved. This is not necessary and just adds extra work during build phase, this is why the project provides the `dev` jar. Besides, this way you need to manually attach source files since the created jar ends up in Forge cache folder.
+Another way to get the library would be to use `fg.deobf` right after declaring the configuration type to indicate that the production jar should be *deobfuscated* after being resolved. This is not necessary and just adds extra work during build phase and makes deal with manually attaching source files. This is why the project provides a compiled `dev` jar.
 
 ### Github
 
