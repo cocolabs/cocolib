@@ -3,13 +3,13 @@
 </p>
 <p align="center">
     <a href="https://jitpack.io/#yooksi/cocolib">
-        <img src="https://jitpack.io/v/yooksi/CocoLib.svg">
+        <img src="https://jitpack.io/v/yooksi/cocolib.svg">
     </a>
     <a href="https://curse.nikky.moe/api/url/384336">
 		<img src="https://curse.nikky.moe/api/img/384336?logo">
 	</a>
     <a href="https://www.gnu.org/licenses/">
-        <img src="https://img.shields.io/github/license/yooksi/CocoLib">
+        <img src="https://img.shields.io/github/license/yooksi/cocolib">
     </a>
     <a href="https://discord.gg/dKY9xW">
         <img src="https://img.shields.io/discord/710517912485494794">
