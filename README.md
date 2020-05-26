@@ -35,15 +35,22 @@ CocoLib does a lot of this for you by providing simple and efficient ways of sol
 
 ## Where to get it?
 
-Each repository production and maven artifacts release contains three `jar` types that you can download:
+This depends on what you want to use the mod for.
 
-- `-dev.jar` is a non-obfuscated version of the jar used by developers.
-- `-sources.jar` contains project source files used by developers.
-- `-.jar` is an obfuscated production-ready jar mostly used by players.
+- **Players** will want only the production jar which can be download from [CurseForge](#curseforge). 
+- **Developers** will want either the dev or production jar (optionally) accompanied by sources jar to make reading and understanding the library code easier when working with their mods.
+- Each production release contains three `jar` types that you can download:
+  - `-dev.jar` is a non-obfuscated version of the jar used by developers.
+  - `-sources.jar` contains project source files used by developers.
+  - `-.jar` is an obfuscated production-ready jar mostly used by players.
 
-**Developers** will want either the dev or production jar (optionally) accompanied by sources jar to make reading and understanding the library code easier when working with their mods.
+Note that the mod can always be downloaded from [Github](#github).
 
-**Players** will want only the production jar found in the repository release section on [Github](#github) which they should treat as a standard game mod (see [How to use it](#players) section for more information).
+### CurseForge
+
+This is the **recommended** way of obtaining a production jar for library users.
+
+Head on over to the [CurseForge](https://www.curseforge.com/minecraft/mc-mods/cocolib/files) page and download the mod from there.
 
 ### Maven
 
@@ -81,8 +88,7 @@ Another way to get the library would be to use `fg.deobf` right after declaring 
 
 ### Github
 
-This is the **recommended** way to obtain the production jar for library users.
-*Developers should only use this way if JitPack is not working or they feel adventurous.*
+This is the **alternative** way to obtain mod jar files. You should only obtain the mod this way if you were instructed to, know what you're doing or are unable to download from both CurseForge and JitPack.
 
 Check the [releases](https://github.com/yooksi/CocoLib/releases) section in project repository page to get the latest release.
 
