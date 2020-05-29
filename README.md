@@ -2,6 +2,11 @@
     <img src="./assets/banner_light.png">
 </p>
 <p align="center">
+    <a href="https://discord.gg/cerPQyS">Discord Chat</a> •
+    <a href="https://github.com/yoco-labs/cocolib/issues/new">Report a Bug</a> •
+    <a href="https://github.com/yoco-labs/cocolib/issues?q=is:issue%20label:feature%20is:open">Planned Features</a>
+</p>
+<p align="center">
     <a href="https://jitpack.io/#yooksi/cocolib">
         <img src="https://jitpack.io/v/yooksi/cocolib.svg">
     </a>
@@ -11,8 +16,8 @@
     <a href="https://www.gnu.org/licenses/">
         <img src="https://img.shields.io/github/license/yooksi/cocolib">
     </a>
-    <a href="https://discord.gg/dKY9xW">
-        <img src="https://img.shields.io/discord/710517912485494794">
+    <a href="https://discord.gg/cerPQyS">
+        <img src="https://img.shields.io/discord/710517912485494794?color=7289DA&label=chat&logo=discord">
     </a>
 </p>
 
